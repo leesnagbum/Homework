@@ -6,7 +6,13 @@
 
 int main()
 {
-    std::cout << "Hello World!\n"; 
+	for (int i = 2; i < 10; i++)
+	{
+		for (int j = 1; j < 10; j++)
+		{
+			std::cout << i << "*" << j << "=" << i*j<<std::endl;
+		}
+	}
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
