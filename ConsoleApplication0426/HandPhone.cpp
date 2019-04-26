@@ -7,14 +7,16 @@
 void HandPhone::Input()
 {
 
-
 	std::cout << "모델명:";
 	std::cin >> model;
-
-	std::cout << "회사명:" << company << std::endl;
-	std::cout << "색 상:" << color << std::endl;
-	std::cout << "전원 상태:" << power << std::endl;
-	std::cout << "카메라 여부:" << camera << std::endl;
+	std::cout << "회사명:";
+	std::cin >> company;
+	std::cout << "색 상:";
+	std::cin >> color;
+	std::cout << "전원 상태:";
+	std::cin >> power;
+	std::cout << "카메라 여부:";
+	std::cin >> camera;
 }
 
 void HandPhone::Print()
