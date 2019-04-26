@@ -1,71 +1,34 @@
 #include "pch.h"
 #include "NameCard.h"
-#include "vld.h"
 
 #include <iostream>
 
-NameCard::NameCard(std::string name, std::vector<std::string> tels, std::vector<std::string> addresss, NameCard::Position position)
-	: name(name), position(position)
+NameCard::NameCard(std::string name, std::string position, std::string companyName, 
+	std::string companyAddress, std::string tel, std::string fax, std::string email)
+	:name(name), position(position), companyName(companyName), companyAddress(companyAddress), tel(tel), fax(fax), email(email)
+{}
+
+// Getter들. 변수 대신 이것을 노출하기 때문에 읽기전용으로 사용될 수 있습니다.
+std::string NameCard::GetName() const { return name; }
+std::string NameCard::GetPosition() const { return position; }
+std::string NameCard::GetCompanyName() const { return companyName; }
+std::string NameCard::GetCompanyAddress() const { return companyAddress; }
+std::string NameCard::GetTelNumber() const { return tel; }
+std::string NameCard::GetFaxNumber() const { return fax; }
+std::string NameCard::GetEmail() const { return email; }
+
+
+void NameCard::Print() const
 {
-	int index;
+	// 순서는 회사명, 이름, 직급, 전화번호, 팩스번호, 이메일, 회사주소
+	std::cout << "====== [" << name << "의 명함] ======\n";
+	std::cout << "회사명 : " << companyName << "\n";
+	std::cout << "이  름 : " << name << "\n";
+	std::cout << "직  급 : " << position << "\n";
+	std::cout << " TEL   : " << tel << "\n";
+	std::cout << " FAX   : " << fax << "\n";
+	std::cout << "Email  : " << email << "\n";
+	std::cout << "회사주소 : " << companyAddress << "\n\n\n";
 
-	// 전화번호 복사
-	maxTel = tels.size();
-	tel = new std::string*[maxTel];
-
-	index = 0;
-	for (auto s : tels)
-		tel[index++] = new std::string(s);
-
-
-	// 주소 복사
-	maxAddress = addresss.size();
-	address = new std::string*[maxAddress];
-
-	index = 0;
-	for (auto s : addresss)
-		address[index++] = new std::string(s);
-}
-
-NameCard::~NameCard()
-{
-	int i;
-	for (i = 0; i < maxAddress; ++i) delete address[i];
-	delete[] address;
-
-	for (i = 0; i < maxTel; ++i) delete tel[i];
-	delete[] tel;
-}
-
-void NameCard::Print()
-{ // 이름, 직급 전화번호 주소
-	int index;
-
-	std::cout << "이름 : " << name << "\n";
-	std::cout << "직급 : ";
-	switch (position)
-	{
-	case Position::Employee:		std::cout << "사원\n"; break;
-	case Position::DeputyHead:		std::cout << "대리\n"; break;
-	case Position::HeadOfDepartment:std::cout << "부장\n"; break;
-	case Position::SectionChief:	std::cout << "과장\n"; break;
-	case Position::Commander:		std::cout << "차장\n"; break;
-
-	default:						std::cout << "인턴\n"; break;
-	}
-
-	for (index = 0; index < maxTel; ++index)
-		std::cout << "전화번호 : " << *tel[index] << "\n";
-
-	for (index = 0; index < maxAddress; ++index)
-		std::cout << " 주 소 : " << *address[index] << "\n";
-}
-int main()
-{
-	NameCard son{ "son",{"010-1111-1111"},{"안산시"},NameCard::Position::SectionChief };
-
-	son.Print();
-	getchar();
-
-	
+	std::cout.flush();
 }
