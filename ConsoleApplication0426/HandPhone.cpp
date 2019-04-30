@@ -14,9 +14,10 @@ void HandPhone::Input()
 	std::cout << "색 상:";
 	std::cin >> color;
 	std::cout << "전원 상태:";
-	std::cin >> power;
+	std::cin >> isPowered;
 	std::cout << "카메라 여부:";
-	std::cin >> camera;
+	std::cin >> hasCamera;
+	std::cout << std::endl;
 }
 
 void HandPhone::Print()
@@ -25,13 +26,26 @@ void HandPhone::Print()
 	std::cout << "상품의 회사명은 " << company << std::endl;
 	std::cout << "상품의 색상은 " << color << std::endl;
 
-	if (isPower)
+	if (isPowered=='o')
 	{
-		std::cout << "전원이 켜져있습니다." << std::endl;
+		PowerOn();
+		std::cout << "전원이" << isPowered <<"켜져있습니다"<< std::endl;
 	}
 	else
 	{
-		std::cout << "전원이 꺼져있습니다." << std::endl;
+		PowerOff();
+		std::cout << "전원이 꺼져있습니다." << (isPowered == false)<<std::endl;
+	}
+
+	if (hasCamera)
+	{
+		CameraYes();
+		std::cout << "카메라가 장착되어있습니다." << (hasCamera == true)<< std::endl;
+	}
+	else
+	{	
+		CameraNo();
+		std::cout << "카메라가 장착되어있지 않습니다." << (hasCamera == true)<<std::endl;
 	}
 }
 
@@ -40,10 +54,19 @@ void HandPhone::TogglePower() { isPowered = !isPowered; } // 토글. 꺼져있을때에�
 void HandPhone::PowerOn() { isPowered = true; }
 void HandPhone::PowerOff() { isPowered = false; }
 
-
-
 // 카메라 여부 조작.
 void HandPhone::CameraYes(){ hasCamera = true; }
 void HandPhone::CameraNo() { hasCamera = false; }
 
 
+int main(void)
+{
+	HandPhone phone;
+	phone.Input();
+	phone.Print();
+	phone.PowerOn();
+	phone.PowerOff();
+	phone.CameraYes();
+	phone.CameraNo();
+	
+}
